@@ -32,7 +32,6 @@ int convertIdtoNr(vector<string>&);
 void findSurname(vector<string>&);
 void findName(vector<string>&);
 void removeContact(vector<string>&);
-void removeContact2(vector<string>&);
 void editContact(vector<string>&);
 int verifyChar();
 string editTxt();
@@ -78,7 +77,7 @@ int main()
                 if(contactsNr==0){
                     cout<<"Address Book empty !!!";
                     Sleep(2000);
-                }else removeContact2(contacts);
+                }else removeContact(contacts);
                 break;
             }case 6:{
                 if(contactsNr==0){
@@ -319,42 +318,6 @@ void editContact(vector<string>& contacts){
        }
 }
 
-void removeContact(vector<string>& contacts){
-    string tmpId, txt;
-    string ver;
-    bool found=false;
-    cout<<"Enter contact Id you wish to remove: "; cin>>tmpId;
-
-        for(int i=0; i<contacts.size();i=i+6){
-         if(tmpId==contacts[i]){
-            found=true;
-            cout<<"You are going to remove contact id: "<<contacts[i]<<endl;
-            cout<<" Name: "<<contacts[i+1]<<" Surname: "<<contacts[i+2]<<endl;
-            cout<<"\nPlease confirm: enter Y for yes or N for no: ";
-            cin>>ver;
-            transform(ver.begin(), ver.end(),ver.begin(),::toupper);
-            if(ver=="Y"){
-                cout<<"Contact removed"<<endl;
-                contacts.erase (contacts.begin(),contacts.begin()+6);
-                exportVectorToFile(contacts);
-                Sleep(1500);
-            }else if(ver=="N"){
-                cout<<"You rejected to remove this contact."<<endl;
-                Sleep(1500);
-                menu();
-            }else {
-                cout<<"Sorry wrong choice."<<endl;
-                Sleep(1500);
-                menu();
-            }
-         }
-
-       }
-       if (found==false){
-        cout<<"Sorry contact with id: "<<tmpId<<" not found."<<endl;
-         Sleep(2000);
-       }
-}
 void exportVectorToFile(vector<string>& contacts){
     fstream file;
     file.open("ContactsBook.txt",ios::out);
@@ -370,7 +333,7 @@ void exportVectorToFile(vector<string>& contacts){
         system("pause");
     }
 }
-void removeContact2(vector<string>& contacts){
+void removeContact(vector<string>& contacts){
     string tmpId, txt;
     string ver;
     bool found=false;
